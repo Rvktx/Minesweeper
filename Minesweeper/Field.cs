@@ -47,24 +47,16 @@ namespace Minesweeper
 
         public bool checkWin()
         {
-            int notChecked = 0;
-            int flagged = 0;
-
             for (int y = 0; y < this.size; y++)
                 for (int x = 0; x < this.size; x++)
                 {
                     if (!this.grid[x, y].IsMined && this.grid[x, y].IsFlagged)
                         return false;
-                    else if (this.grid[x, y].IsFlagged)
-                        flagged++;
-                    else if (!this.grid[x, y].IsChecked)
-                        notChecked++;
+                    else if (!this.grid[x, y].IsFlagged && this.grid[x, y].IsMined)
+                        return false;
                 }
 
-            if ((notChecked + flagged) == this.mines)
-                return true;
-            else
-                return false;
+            return true;
         }
 
         private void generateField()

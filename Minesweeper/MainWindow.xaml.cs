@@ -1,5 +1,6 @@
 ﻿using Minesweeper.Properties;
 using System;
+using System.DirectoryServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -30,6 +31,8 @@ namespace Minesweeper
 
         public static void restart()
         {
+            foreach (Border item in w.canvasGrid)
+                w.canvas.Children.Remove(item);
             w.canvasGrid = null;
             w.controller = null;
             w.initCanvasCells();
