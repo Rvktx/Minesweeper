@@ -13,11 +13,13 @@ namespace Minesweeper
 
         private readonly Border[,] canvasGrid;
         private readonly Field field;
+        private bool hasBegun;
         private bool isFinished;
 
         public GameController(Border[,] canvasGrid)
         {
             this.canvasGrid = canvasGrid;
+            this.hasBegun = false;
             this.isFinished = false;
             this.field = new Field(Settings.Default.size, Settings.Default.mines);
             this.refreshDisplay();
@@ -25,6 +27,11 @@ namespace Minesweeper
 
         public void checkHandler(int x, int y)
         {
+            if (!hasBegun)
+            {
+                this.hasBegun = true;
+                this.field.deployMines(x, y);
+            }
             if (!isFinished)
             {
                 this.field.check(x, y);
@@ -35,7 +42,7 @@ namespace Minesweeper
 
         public void flagHandler(int x, int y)
         {
-            if (!isFinished)
+            if (!this.isFinished && this.hasBegun)
             {
                 this.field.Grid[x, y].toggleFlag();
                 this.checkFinish();

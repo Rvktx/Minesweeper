@@ -19,12 +19,27 @@ namespace Minesweeper
             this.grid = new Cell[this.size, this.size];
 
             this.generateField();
-            this.setAllNeighbors();
         }
 
         public Cell[,] Grid { get => grid; }
 
         public bool IsLost { get => isLost; }
+
+        public void deployMines(int i, int j)
+        {
+            int count = 0;
+            while (count < this.mines)
+            {
+                int x = random.Next(0, this.size);
+                int y = random.Next(0, this.size);
+                if (!this.grid[x, y].IsMined && x != i && y != j)
+                {
+                    this.grid[x, y].mine();
+                    count++;
+                }
+            }
+            this.setAllNeighbors();
+        }
 
         public void check(int x, int y)
         {
@@ -64,18 +79,6 @@ namespace Minesweeper
             for (int y = 0; y < this.size; y++)
                 for (int x = 0; x < this.size; x++)
                     this.grid[x, y] = new Cell();
-
-            int count = 0;
-            while (count < this.mines)
-            {
-                int x = random.Next(0, this.size);
-                int y = random.Next(0, this.size);
-                if (!this.grid[x, y].IsMined)
-                {
-                    this.grid[x, y].mine();
-                    count++;
-                }
-            }
         }
 
         private void setAllNeighbors()
