@@ -105,7 +105,7 @@ namespace Minesweeper
         {
             for (int y = 0; y < this.size; y++)
                 for (int x = 0; x < this.size; x++)
-                    if (x != i && y != j && this.grid[x, y].IsMined)
+                    if (this.grid[x, y].IsMined)
                         this.grid[x, y].check();
         }
     }
