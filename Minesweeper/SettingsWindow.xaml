@@ -1,0 +1,27 @@
+﻿<Window x:Class="Minesweeper.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Minesweeper"
+        mc:Ignorable="d"
+        Title="Settings" Height="240" Width="390">
+    <Canvas>
+        <Label Content="Field width" Canvas.Left="10" Canvas.Top="10" FontSize="16" Width="100"/>
+        <Label Content="Field height" Canvas.Left="10" Canvas.Top="46" FontSize="16" Width="100"/>
+        <Label Content="Mines count" Canvas.Left="10" Canvas.Top="82" FontSize="16" Width="100"/>
+
+        <Label x:Name="widthLabel" Content="10" Canvas.Left="320" Canvas.Top="10" FontSize="16" Width="70"/>
+        <Label x:Name="heightLabel" Content="10" Canvas.Left="320" Canvas.Top="46" FontSize="16" Width="70"/>
+        <Label x:Name="minesLabel" Content="15" Canvas.Left="320" Canvas.Top="82" FontSize="16" Width="70"/>
+        <Label x:Name="chanceLabel" Content="There will be 15% chance of hitting a mine." Canvas.Left="10" Canvas.Top="118" FontSize="16" Width="380"/>
+
+        <Slider x:Name="minesSlider" Canvas.Left="115" Canvas.Top="86" Width="200" Maximum="40" Minimum="1" SmallChange="1" TickPlacement="BottomRight" Value="15" ValueChanged="minesSlider_ValueChanged"/>
+        <Slider x:Name="heightSlider" Canvas.Left="115" Canvas.Top="50" Width="200" Maximum="35" Minimum="5" SmallChange="1" TickPlacement="BottomRight" Value="10" ValueChanged="heightSlider_ValueChanged"/>
+        <Slider x:Name="widthSlider" Canvas.Left="115" Canvas.Top="14" Width="200" Maximum="45" Minimum="5" SmallChange="1" TickPlacement="BottomRight" Value="10" ValueChanged="widthSlider_ValueChanged"/>
+
+        <Button x:Name="cancelButton" Content="Cancel" Canvas.Left="190" Canvas.Top="154" FontSize="18" Width="80" Height="35" Click="cancelButton_Click"/>
+        <Button x:Name="applyButton" Content="Apply" Canvas.Left="275" Canvas.Top="154" FontSize="18" Width="80" Height="35" Click="applyButton_Click"/>
+
+    </Canvas>
+</Window>

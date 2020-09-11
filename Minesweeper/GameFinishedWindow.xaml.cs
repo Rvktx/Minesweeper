@@ -9,6 +9,7 @@ namespace Minesweeper
     {
         public GameFinishedWindow(string text)
         {
+            MainWindow.disable();
             InitializeComponent();
             msg.Text = text;
         }

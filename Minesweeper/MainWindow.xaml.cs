@@ -14,36 +14,45 @@ namespace Minesweeper
     public partial class MainWindow : Window
     {
         private static MainWindow w;
+        private static SettingsWindow settings;
+
         private const int CELL_SIZE = 25;
         private const int WIDTH_OFFSET = 17;
-        private const int HEIGHT_OFFSET = 84;
+        private const int HEIGHT_OFFSET = 64;
 
         private Border[,] canvasGrid;
         private GameController controller;
+
+        private bool disabled;
+        private bool restarting;
 
         public MainWindow()
         {
             w = this;
             InitializeComponent();
-            mainWindow.Width = Settings.Default.size * CELL_SIZE + WIDTH_OFFSET;
-            mainWindow.Height = Settings.Default.size * CELL_SIZE + HEIGHT_OFFSET;
+            mainWindow.Width = Settings.Default.fieldWidth * CELL_SIZE + WIDTH_OFFSET;
+            mainWindow.Height = Settings.Default.fieldHeight * CELL_SIZE + HEIGHT_OFFSET;
+        }
+
+        public static void disable()
+        {
+            w.disabled = true;
         }
 
         public static void restart()
         {
-            foreach (Border item in w.canvasGrid)
-                w.canvas.Children.Remove(item);
-            w.canvasGrid = null;
-            w.controller = null;
-            w.initCanvasCells();
-            w.controller = new GameController(w.canvasGrid);
+            w.restarting = true;
+            MainWindow prev = w;
+            w = new MainWindow();
+            prev.Close();
+            w.Show();
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-
-            Application.Current.Shutdown();
+            if (!this.restarting)
+                Application.Current.Shutdown();
         }
 
         private void canvas_Initialized(object sender, EventArgs e)
@@ -54,9 +63,9 @@ namespace Minesweeper
 
         private void initCanvasCells()
         {
-            canvasGrid = new Border[Settings.Default.size, Settings.Default.size];
-            for (int y = 0; y < Settings.Default.size; y++)
-                for (int x = 0; x < Settings.Default.size; x++)
+            canvasGrid = new Border[Settings.Default.fieldWidth, Settings.Default.fieldHeight];
+            for (int y = 0; y < Settings.Default.fieldHeight; y++)
+                for (int x = 0; x < Settings.Default.fieldWidth; x++)
                 {
                     TextBlock tb = new TextBlock();
                     tb.Width = CELL_SIZE;
@@ -78,19 +87,6 @@ namespace Minesweeper
                 }
         }
 
-        private void coordinatesLabel_MouseEnter(object sender, MouseEventArgs e)
-        {
-            coordinatesLabel.Content = "XD";
-        }
-
-        private void canvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            int xPos = (int)Math.Floor(e.GetPosition(canvas).X / CELL_SIZE);
-            int yPos = (int)Math.Floor(e.GetPosition(canvas).Y / CELL_SIZE);
-
-            coordinatesLabel.Content = String.Format("(X:{0}, Y:{1})", xPos, yPos);
-        }
-
         private void canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             int xPos = (int)Math.Floor(e.GetPosition(canvas).X / CELL_SIZE);
@@ -100,6 +96,17 @@ namespace Minesweeper
                 controller.checkHandler(xPos, yPos);
             else if (e.ChangedButton == MouseButton.Right)
                 controller.flagHandler(xPos, yPos);
+        }
+
+        private void settingsButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (this.disabled)
+                return;
+            if (settings != null)
+                settings.Close();
+            settings = new SettingsWindow();
+            settings.Show();
+            settings.Activate();
         }
     }
 }

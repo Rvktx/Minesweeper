@@ -25,25 +25,37 @@ namespace Minesweeper.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int fieldWidth {
+            get {
+                return ((int)(this["fieldWidth"]));
+            }
+            set {
+                this["fieldWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int fieldHeight {
+            get {
+                return ((int)(this["fieldHeight"]));
+            }
+            set {
+                this["fieldHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
         public int mines {
             get {
                 return ((int)(this["mines"]));
             }
             set {
                 this["mines"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public int size {
-            get {
-                return ((int)(this["size"]));
-            }
-            set {
-                this["size"] = value;
             }
         }
     }

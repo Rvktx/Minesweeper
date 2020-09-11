@@ -21,7 +21,7 @@ namespace Minesweeper
             this.canvasGrid = canvasGrid;
             this.hasBegun = false;
             this.isFinished = false;
-            this.field = new Field(Settings.Default.size, Settings.Default.mines);
+            this.field = new Field(Settings.Default.fieldWidth, Settings.Default.fieldHeight, Settings.Default.mines);
             this.refreshDisplay();
         }
 
@@ -52,8 +52,8 @@ namespace Minesweeper
 
         private void refreshDisplay()
         {
-            for (int y = 0; y < Settings.Default.size; y++)
-                for (int x = 0; x < Settings.Default.size; x++)
+            for (int y = 0; y < Settings.Default.fieldHeight; y++)
+                for (int x = 0; x < Settings.Default.fieldWidth; x++)
                 {
                     TextBlock currTextBlock = (TextBlock)this.canvasGrid[x, y].Child;
 
