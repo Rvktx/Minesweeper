@@ -22,35 +22,35 @@ namespace Minesweeper
             this.hasBegun = false;
             this.isFinished = false;
             this.field = new Field(Settings.Default.fieldWidth, Settings.Default.fieldHeight, Settings.Default.mines);
-            this.refreshDisplay();
+            this.RefreshDisplay();
         }
 
-        public void checkHandler(int x, int y)
+        public void CheckHandler(int x, int y)
         {
             if (!hasBegun)
             {
                 this.hasBegun = true;
-                this.field.deployMines(x, y);
+                this.field.DeployMines(x, y);
             }
             if (!isFinished)
             {
-                this.field.check(x, y);
-                this.checkFinish();
-                this.refreshDisplay();
+                this.field.Check(x, y);
+                this.CheckFinish();
+                this.RefreshDisplay();
             }
         }
 
-        public void flagHandler(int x, int y)
+        public void FlagHandler(int x, int y)
         {
             if (!this.isFinished && this.hasBegun)
             {
-                this.field.Grid[x, y].toggleFlag();
-                this.checkFinish();
-                this.refreshDisplay();
+                this.field.Grid[x, y].ToggleFlag();
+                this.CheckFinish();
+                this.RefreshDisplay();
             }
         }
 
-        private void refreshDisplay()
+        private void RefreshDisplay()
         {
             for (int y = 0; y < Settings.Default.fieldHeight; y++)
                 for (int x = 0; x < Settings.Default.fieldWidth; x++)
@@ -75,12 +75,15 @@ namespace Minesweeper
                     else
                     {
                         currTextBlock.Background = Brushes.White;
-                        currTextBlock.Text = this.field.Grid[x, y].MinesNearby.ToString();
+                        if (this.field.Grid[x, y].MinesNearby == 0)
+                            currTextBlock.Text = " ";
+                        else
+                            currTextBlock.Text = this.field.Grid[x, y].MinesNearby.ToString();
                     }
                 }
         }
 
-        private void checkFinish()
+        private void CheckFinish()
         {
             if (this.field.IsLost)
             {
@@ -88,7 +91,7 @@ namespace Minesweeper
                 GameFinishedWindow f = new GameFinishedWindow("You lost XDDD");
                 f.Show();
             }
-            else if (this.field.checkWin())
+            else if (this.field.CheckWin())
             {
                 this.isFinished = true;
                 GameFinishedWindow f = new GameFinishedWindow("You won!");

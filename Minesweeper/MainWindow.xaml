@@ -8,8 +8,8 @@
         Title="Minesweeper" Height="864" Width="800" ResizeMode="CanMinimize">
     <Grid x:Name="gridContainer">
         <Menu x:Name="menuBar" Height="24" VerticalAlignment="Top">
-            <Label x:Name="settingsButton" Content="Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" MouseDown="settingsButton_MouseDown" Height="24" Width="50" FontSize="14"/>
+            <Label x:Name="settingsButton" Content="Settings" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,0,0" MouseDown="SettingsButton_MouseDown" Height="24" Width="50" FontSize="14"/>
         </Menu>
-        <Canvas x:Name="canvas" Margin="0,24,0,0" Cursor="Cross" Focusable="True" Initialized="canvas_Initialized" MouseDown="canvas_MouseDown" Background="Gray"/>
+        <Canvas x:Name="canvas" Margin="0,24,0,0" Cursor="Cross" Focusable="True" Initialized="Canvas_Initialized" MouseDown="Canvas_MouseDown" Background="Gray"/>
     </Grid>
 </Window>

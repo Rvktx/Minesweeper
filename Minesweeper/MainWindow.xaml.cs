@@ -34,12 +34,12 @@ namespace Minesweeper
             mainWindow.Height = Settings.Default.fieldHeight * CELL_SIZE + HEIGHT_OFFSET;
         }
 
-        public static void disable()
+        public static void Disable()
         {
             w.disabled = true;
         }
 
-        public static void restart()
+        public static void Restart()
         {
             w.restarting = true;
             MainWindow prev = w;
@@ -55,31 +55,35 @@ namespace Minesweeper
                 Application.Current.Shutdown();
         }
 
-        private void canvas_Initialized(object sender, EventArgs e)
+        private void Canvas_Initialized(object sender, EventArgs e)
         {
-            this.initCanvasCells();
+            this.InitCanvasCells();
             this.controller = new GameController(this.canvasGrid);
         }
 
-        private void initCanvasCells()
+        private void InitCanvasCells()
         {
             canvasGrid = new Border[Settings.Default.fieldWidth, Settings.Default.fieldHeight];
             for (int y = 0; y < Settings.Default.fieldHeight; y++)
                 for (int x = 0; x < Settings.Default.fieldWidth; x++)
                 {
-                    TextBlock tb = new TextBlock();
-                    tb.Width = CELL_SIZE;
-                    tb.Height = CELL_SIZE;
-                    tb.FontSize = 18;
-                    tb.TextAlignment = TextAlignment.Center;
+                    TextBlock tb = new TextBlock
+                    {
+                        Width = CELL_SIZE,
+                        Height = CELL_SIZE,
+                        FontSize = 18,
+                        TextAlignment = TextAlignment.Center,
 
-                    tb.Background = Brushes.LightGray;
-                    tb.Text = "";
+                        Background = Brushes.LightGray,
+                        Text = ""
+                    };
 
-                    canvasGrid[x, y] = new Border();
-                    canvasGrid[x, y].BorderThickness = new Thickness(1);
-                    canvasGrid[x, y].BorderBrush = Brushes.Black;
-                    canvasGrid[x, y].Child = tb;
+                    canvasGrid[x, y] = new Border
+                    {
+                        BorderThickness = new Thickness(1),
+                        BorderBrush = Brushes.Black,
+                        Child = tb
+                    };
 
                     canvas.Children.Add(canvasGrid[x, y]);
                     Canvas.SetTop(canvasGrid[x, y], y * CELL_SIZE);
@@ -87,18 +91,18 @@ namespace Minesweeper
                 }
         }
 
-        private void canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             int xPos = (int)Math.Floor(e.GetPosition(canvas).X / CELL_SIZE);
             int yPos = (int)Math.Floor(e.GetPosition(canvas).Y / CELL_SIZE);
 
             if (e.ChangedButton == MouseButton.Left)
-                controller.checkHandler(xPos, yPos);
+                controller.CheckHandler(xPos, yPos);
             else if (e.ChangedButton == MouseButton.Right)
-                controller.flagHandler(xPos, yPos);
+                controller.FlagHandler(xPos, yPos);
         }
 
-        private void settingsButton_MouseDown(object sender, MouseButtonEventArgs e)
+        private void SettingsButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (this.disabled)
                 return;

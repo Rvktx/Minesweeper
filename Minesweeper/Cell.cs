@@ -20,24 +20,24 @@
         public bool IsMined { get => isMined; }
         public int MinesNearby { get => minesNearby; }
 
-        public void check()
+        public void Check()
         {
             this.isFlagged = false;
             this.isChecked = true;
         }
 
-        public void toggleFlag()
+        public void ToggleFlag()
         {
             if (!this.IsChecked)
                 this.isFlagged = !this.isFlagged;
         }
 
-        public void mine()
+        public void Mine()
         {
             this.isMined = true;
         }
 
-        public void setMinesNearby(int neighbors)
+        public void SetMinesNearby(int neighbors)
         {
             this.minesNearby = neighbors;
             if (this.minesNearby > 0)

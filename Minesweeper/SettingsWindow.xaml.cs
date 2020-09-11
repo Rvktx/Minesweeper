@@ -20,11 +20,11 @@ namespace Minesweeper
             this.fieldWidth = Settings.Default.fieldWidth;
             this.fieldHeight = Settings.Default.fieldHeight;
             this.mines = Settings.Default.mines;
-            this.updateArea();
+            this.UpdateArea();
             InitializeComponent();
         }
 
-        private void updateArea()
+        private void UpdateArea()
         {
             this.fieldArea = this.fieldWidth * this.fieldHeight;
             this.minesMax = (int)Math.Floor(0.4 * this.fieldArea);
@@ -32,7 +32,7 @@ namespace Minesweeper
                 this.mines = this.minesMax;
         }
 
-        private void updateChance()
+        private void UpdateChance()
         {
             String textPart1 = "There will be ";
             String textPart2 = "% chance of hitting a mine.";
@@ -41,12 +41,12 @@ namespace Minesweeper
             chanceLabel.Content = textPart1 + chance + textPart2;
         }
 
-        private void updateMinesSlider()
+        private void UpdateMinesSlider()
         {
             minesSlider.Maximum = this.minesMax;
             minesSlider.Value = this.mines;
             minesLabel.Content = this.mines;
-            this.updateChance();
+            this.UpdateChance();
         }
 
         private void Canvas_Initialized(object sender, EventArgs e)
@@ -55,45 +55,45 @@ namespace Minesweeper
             widthLabel.Content = this.fieldWidth;
             heightSlider.Value = this.fieldHeight;
             heightLabel.Content = this.fieldHeight;
-            this.updateMinesSlider();
+            this.UpdateMinesSlider();
         }
 
-        private void widthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void WidthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             this.fieldWidth = (int)widthSlider.Value;
             widthLabel.Content = this.fieldWidth;
-            this.updateArea();
-            this.updateMinesSlider();
+            this.UpdateArea();
+            this.UpdateMinesSlider();
         }
 
-        private void heightSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void HeightSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             this.fieldHeight = (int)heightSlider.Value;
             heightLabel.Content = this.fieldHeight;
-            this.updateArea();
-            this.updateMinesSlider();
+            this.UpdateArea();
+            this.UpdateMinesSlider();
         }
 
-        private void minesSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void MinesSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             this.mines = (int)minesSlider.Value;
             minesLabel.Content = this.mines;
 
-            this.updateChance();
+            this.UpdateChance();
         }
 
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void applyButton_Click(object sender, RoutedEventArgs e)
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             Settings.Default.fieldWidth = this.fieldWidth;
             Settings.Default.fieldHeight = this.fieldHeight;
             Settings.Default.mines = this.mines;
             this.Close();
-            MainWindow.restart();
+            MainWindow.Restart();
         }
     }
 }

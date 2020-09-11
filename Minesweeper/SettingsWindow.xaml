@@ -16,12 +16,12 @@
         <Label x:Name="minesLabel" Content="15" Canvas.Left="320" Canvas.Top="82" FontSize="16" Width="70"/>
         <Label x:Name="chanceLabel" Content="There will be 15% chance of hitting a mine." Canvas.Left="10" Canvas.Top="118" FontSize="16" Width="380"/>
 
-        <Slider x:Name="minesSlider" Canvas.Left="115" Canvas.Top="86" Width="200" Maximum="40" Minimum="1" SmallChange="1" TickPlacement="BottomRight" Value="15" ValueChanged="minesSlider_ValueChanged"/>
-        <Slider x:Name="heightSlider" Canvas.Left="115" Canvas.Top="50" Width="200" Maximum="35" Minimum="5" SmallChange="1" TickPlacement="BottomRight" Value="10" ValueChanged="heightSlider_ValueChanged"/>
-        <Slider x:Name="widthSlider" Canvas.Left="115" Canvas.Top="14" Width="200" Maximum="45" Minimum="5" SmallChange="1" TickPlacement="BottomRight" Value="10" ValueChanged="widthSlider_ValueChanged"/>
+        <Slider x:Name="minesSlider" Canvas.Left="115" Canvas.Top="86" Width="200" Maximum="40" Minimum="1" SmallChange="1" TickPlacement="BottomRight" Value="15" ValueChanged="MinesSlider_ValueChanged"/>
+        <Slider x:Name="heightSlider" Canvas.Left="115" Canvas.Top="50" Width="200" Maximum="35" Minimum="5" SmallChange="1" TickPlacement="BottomRight" Value="10" ValueChanged="HeightSlider_ValueChanged"/>
+        <Slider x:Name="widthSlider" Canvas.Left="115" Canvas.Top="14" Width="200" Maximum="45" Minimum="5" SmallChange="1" TickPlacement="BottomRight" Value="10" ValueChanged="WidthSlider_ValueChanged"/>
 
-        <Button x:Name="cancelButton" Content="Cancel" Canvas.Left="190" Canvas.Top="154" FontSize="18" Width="80" Height="35" Click="cancelButton_Click"/>
-        <Button x:Name="applyButton" Content="Apply" Canvas.Left="275" Canvas.Top="154" FontSize="18" Width="80" Height="35" Click="applyButton_Click"/>
+        <Button x:Name="cancelButton" Content="Cancel" Canvas.Left="190" Canvas.Top="154" FontSize="18" Width="80" Height="35" Click="CancelButton_Click"/>
+        <Button x:Name="applyButton" Content="Apply" Canvas.Left="275" Canvas.Top="154" FontSize="18" Width="80" Height="35" Click="ApplyButton_Click"/>
 
     </Canvas>
 </Window>

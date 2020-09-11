@@ -21,14 +21,14 @@ namespace Minesweeper
             this.mines = mines;
             this.grid = new Cell[this.xSize, this.ySize];
 
-            this.generateField();
+            this.GenerateField();
         }
 
         public Cell[,] Grid { get => grid; }
 
         public bool IsLost { get => isLost; }
 
-        public void deployMines(int i, int j)
+        public void DeployMines(int i, int j)
         {
             int count = 0;
             while (count < this.mines)
@@ -37,20 +37,20 @@ namespace Minesweeper
                 int y = random.Next(0, this.ySize);
                 if (!this.grid[x, y].IsMined && x != i && y != j)
                 {
-                    this.grid[x, y].mine();
+                    this.grid[x, y].Mine();
                     count++;
                 }
             }
-            this.setAllNeighbors();
+            this.SetAllNeighbors();
         }
 
-        public void check(int x, int y)
+        public void Check(int x, int y)
         {
-            this.grid[x, y].check();
+            this.grid[x, y].Check();
 
             if (this.grid[x, y].IsMined)
             {
-                this.revealAllMines();
+                this.RevealAllMines();
                 this.isLost = true;
             }
             else if (this.grid[x, y].MinesNearby == 0)
@@ -59,11 +59,11 @@ namespace Minesweeper
                     for (int i = x - 1; i <= x + 1; i++)
                         if (i >= 0 && j >= 0 && i < this.xSize && j < this.ySize)
                             if (!this.grid[i, j].IsMined && !this.grid[i, j].IsChecked)
-                                this.check(i, j);
+                                this.Check(i, j);
             }
         }
 
-        public bool checkWin()
+        public bool CheckWin()
         {
             for (int y = 0; y < this.ySize; y++)
                 for (int x = 0; x < this.xSize; x++)
@@ -77,21 +77,21 @@ namespace Minesweeper
             return true;
         }
 
-        private void generateField()
+        private void GenerateField()
         {
             for (int y = 0; y < this.ySize; y++)
                 for (int x = 0; x < this.xSize; x++)
                     this.grid[x, y] = new Cell();
         }
 
-        private void setAllNeighbors()
+        private void SetAllNeighbors()
         {
             for (int y = 0; y < this.ySize; y++)
                 for (int x = 0; x < this.xSize; x++)
-                    this.grid[x, y].setMinesNearby(calcNeighbors(x, y));
+                    this.grid[x, y].SetMinesNearby(CalcNeighbors(x, y));
         }
 
-        private int calcNeighbors(int x, int y)
+        private int CalcNeighbors(int x, int y)
         {
             int neighbors = 0;
 
@@ -104,12 +104,12 @@ namespace Minesweeper
             return neighbors;
         }
 
-        private void revealAllMines()
+        private void RevealAllMines()
         {
             for (int y = 0; y < this.ySize; y++)
                 for (int x = 0; x < this.xSize; x++)
                     if (this.grid[x, y].IsMined)
-                        this.grid[x, y].check();
+                        this.grid[x, y].Check();
         }
     }
 }

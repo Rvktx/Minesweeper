@@ -9,18 +9,18 @@ namespace Minesweeper
     {
         public GameFinishedWindow(string text)
         {
-            MainWindow.disable();
+            MainWindow.Disable();
             InitializeComponent();
             msg.Text = text;
         }
 
-        private void retryButton_Click(object sender, RoutedEventArgs e)
+        private void RetryButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.restart();
+            MainWindow.Restart();
             this.Close();
         }
 
-        private void exitButton_Click(object sender, RoutedEventArgs e)
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
